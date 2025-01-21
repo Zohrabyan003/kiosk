@@ -95,7 +95,6 @@ function Shop() {
         message: "Order placed successfully",
       });
       setCart([]);
-      const orderId = response.data.id;
 
     } catch (error) {
       setMessage({
