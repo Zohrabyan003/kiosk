@@ -86,7 +86,7 @@ function Shop() {
 
   const orderProducts = async () => {
     try {
-      const response = await axios.post(url + "orders", {
+      await axios.post(url + "orders", {
         cart: cart,
         date: new Date().toISOString(),
       });
