@@ -24,14 +24,14 @@ function Shop() {
       setCategories(res.data)
     })
 
-  }, [user, admin])
+  }, [user, admin,navigate])
   useEffect(() => {
     if (cart.length === 0) {
       setDisabled(true)
     } else {
       setDisabled(false)
     }
-  }, [cart])
+  }, [cart,navigate])
   useEffect(() => {
     const main = []
     axios.get(url + "products").then((res) => {
@@ -47,7 +47,7 @@ function Shop() {
       setProducts(main)
 
     })
-  }, [categories])
+  }, [categories,navigate])
 
 
   const increaseCount = (id) => {

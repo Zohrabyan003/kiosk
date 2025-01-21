@@ -30,7 +30,7 @@ function Admin() {
     fetchOrders(today);
     fetchTips(today);
     fetchCashbox(today);
-  }, [user,admin]);
+  }, [user,admin,navigate]);
 
   const handleDateChange = (event) => {
     setFilterDate(event.target.value);

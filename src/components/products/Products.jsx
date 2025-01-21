@@ -11,7 +11,7 @@ function Products() {
     if (user || !admin) {
       navigate("/")
     }
-  }, [user,admin])
+  }, [user,admin,navigate])
 
   const url = "http://localhost:3002/"
   const [categories, setCategories] = useState([])
@@ -27,7 +27,7 @@ function Products() {
     axios.get(url + "categories").then((res) => {
       setCategories(res.data)
     })
-  }, [user,admin])
+  }, [user,admin,navigate])
 
   useEffect(() => {
     axios.get(url + "products").then((res) => {
@@ -37,11 +37,7 @@ function Products() {
       });
       setProducts(main)
     })
-  }, [categories])
-
-  useEffect(() => {
-    console.log(edit);
-  }, [edit])
+  }, [categories,navigate])
 
   const addProduct = async () => {
     try {

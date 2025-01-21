@@ -23,7 +23,7 @@ function Cashbox() {
       setSelectedDate(today);
       loadCashboxAmount(today);
     }
-  }, [user, admin]);
+  }, [user, admin,navigate]);
 
   const handleDateChange = (e) => {
     const newDate = e.target.value;
