@@ -1,4 +1,4 @@
-import { useNavigate, useRoutes, useSearchParams } from 'react-router-dom'
+import { useNavigate, useRoutes } from 'react-router-dom'
 import "./App.css"
 import { useEffect, useState } from 'react'
 import axios from 'axios'
