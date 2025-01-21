@@ -27,7 +27,7 @@ function Products() {
     axios.get(url + "categories").then((res) => {
       setCategories(res.data)
     })
-  }, [])
+  }, [user,admin])
 
   useEffect(() => {
     axios.get(url + "products").then((res) => {
