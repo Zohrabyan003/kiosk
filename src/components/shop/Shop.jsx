@@ -18,7 +18,7 @@ function Shop() {
     })
   }, [])
   useEffect(() => {
-    if (cart.length == 0) {
+    if (cart.length === 0) {
       setDisabled(true)
     } else {
       setDisabled(false)

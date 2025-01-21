@@ -26,7 +26,7 @@ function Login() {
         let userid = ""
         let usertype = ""
         for (let i = 0; i < users.length; i++) {
-            if (users[i].username == username && users[i].password == password) {
+            if (users[i].username === username && users[i].password === password) {
                 check = true
                 userid = users[i].id
                 usertype = users[i].type
@@ -38,8 +38,8 @@ function Login() {
     }
     function login() {
         let check = checkUser()
-        if (check[0] == true) {
-            if (check[2] == "admin") {
+        if (check[0] === true) {
+            if (check[2] === "admin") {
                 navigate('/admin')
                 sessionStorage.setItem('admin', JSON.stringify(check[1]));
 
