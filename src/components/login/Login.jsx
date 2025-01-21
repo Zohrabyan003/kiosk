@@ -20,7 +20,7 @@ function Login() {
             axios.get(url).then((res) => setUsers(res.data))
 
         }
-    }, [])
+    }, [admin,user])
     function checkUser() {
         let check = false
         let userid = ""

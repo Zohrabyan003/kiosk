@@ -14,15 +14,16 @@ function Cashbox() {
   const [message, setMessage] = useState(null);
 
   useEffect(() => {
-    if (user || !admin) {
+    if (!admin) {
       navigate('/');
+    } else if (user) {
+      navigate("/shop")
+    } else {
+      const today = new Date().toISOString().split('T')[0];
+      setSelectedDate(today);
+      loadCashboxAmount(today);
     }
-
-    const today = new Date().toISOString().split('T')[0];
-    setSelectedDate(today);
-
-    loadCashboxAmount(today);
-  }, []);
+  }, [user, admin]);
 
   const handleDateChange = (e) => {
     const newDate = e.target.value;
@@ -37,7 +38,7 @@ function Cashbox() {
   const loadCashboxAmount = async (date) => {
     try {
       const res = await axios.get(`${url}?date=${date}`);
-      setCashAmount(res.data[0].amount  || '');
+      setCashAmount(res.data[0].amount || '');
     } catch (error) {
       setCashAmount('');
       console.error("Error fetching cashbox data:", error);
@@ -49,12 +50,12 @@ function Cashbox() {
       setMessage('Please enter a valid amount');
       return;
     }
-  
+
     try {
       const res = await axios.get(`${url}?date=${selectedDate}`);
       console.log(res.data.length);
       console.log(selectedDate);
-      
+
       if (res.data.length > 0) {
         await axios.put(`${url}/${res.data[0].id}`, {
           date: selectedDate,
@@ -68,18 +69,15 @@ function Cashbox() {
         });
         setMessage(`Cashbox for ${selectedDate} saved successfully`);
       }
-  
+
       loadCashboxAmount(selectedDate);
     } catch (error) {
       setMessage('Failed to save cashbox money');
       console.error("Error saving cashbox data:", error);
     }
-  
+
     setTimeout(() => setMessage(null), 3000);
   };
-  
-  
-  
 
   return (
     <div>

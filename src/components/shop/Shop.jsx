@@ -1,7 +1,11 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 function Shop() {
+  const user = sessionStorage.getItem('user');
+  const admin = sessionStorage.getItem('admin');
+  const navigate = useNavigate();
 
   const [categories, setCategories] = useState([])
   const [products, setProducts] = useState([])
@@ -13,10 +17,14 @@ function Shop() {
   const url = "http://localhost:3002/"
 
   useEffect(() => {
+    if (!user || admin) {
+      navigate("/")
+    }
     axios.get(url + "categories").then((res) => {
       setCategories(res.data)
     })
-  }, [])
+
+  }, [user, admin])
   useEffect(() => {
     if (cart.length === 0) {
       setDisabled(true)

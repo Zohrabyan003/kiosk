@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 function AdminNav() {
     const navigate = useNavigate();
-
     return (
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">

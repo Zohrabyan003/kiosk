@@ -5,12 +5,13 @@ import { useNavigate } from 'react-router-dom';
 
 function Products() {
   const user = sessionStorage.getItem('user');
+  const admin = sessionStorage.getItem('admin');
   const navigate = useNavigate();
   useEffect(() => {
-    if (user) {
+    if (user || !admin) {
       navigate("/")
     }
-  }, [])
+  }, [user,admin])
 
   const url = "http://localhost:3002/"
   const [categories, setCategories] = useState([])

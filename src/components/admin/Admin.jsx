@@ -1,7 +1,12 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 function Admin() {
+  const admin = sessionStorage.getItem('admin');
+  const user = sessionStorage.getItem('user');
+  const navigate = useNavigate();
+
   const orderUrl = "http://localhost:3002/orders";
   const tipsUrl = "http://localhost:3002/tips";
   const cashboxUrl = "http://localhost:3002/cashbox";
@@ -14,6 +19,11 @@ function Admin() {
   const [totalTips, setTotalTips] = useState(0);
 
   useEffect(() => {
+    if (user) {
+      navigate("/shop")
+    }else if(!admin){
+      navigate("/")
+    }
     const today = new Date().toISOString().split('T')[0];
     setFilterDate(today);
 
@@ -60,15 +70,15 @@ function Admin() {
   const fetchCashbox = async (date) => {
     try {
       const res = await axios.get(`${cashboxUrl}?date=${date}`);
-      
+
       setCashboxAmount(res.data[0].amount || 0);
     } catch (error) {
       setCashboxAmount(0);
       console.error("Error fetching cashbox amount:", error);
     }
   };
-  
-  
+
+
 
   return (
     <div>
